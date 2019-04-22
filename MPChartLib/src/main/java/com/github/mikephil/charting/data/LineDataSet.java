@@ -1,6 +1,9 @@
 
 package com.github.mikephil.charting.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
@@ -11,9 +14,6 @@ import com.github.mikephil.charting.formatter.IFillFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.Utils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class LineDataSet extends LineRadarDataSet<Entry> implements ILineDataSet {
 
@@ -91,6 +91,19 @@ public class LineDataSet extends LineRadarDataSet<Entry> implements ILineDataSet
         LineDataSet copied = new LineDataSet(entries, getLabel());
         copy(copied);
         return copied;
+    }
+
+    /**
+     * Adds an Entry to the DataSet dynamically.
+     * Entries are added to the end of the list.
+     * This will also recalculate the current minimum and maximum
+     * values of the DataSet and the value-sum.
+     *
+     * @param x
+     * @param y
+     */
+    public boolean addEntry(float x, float y) {
+        return addEntry(new Entry(x, y));
     }
 
     protected void copy(LineDataSet lineDataSet) {
